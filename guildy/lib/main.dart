@@ -17,6 +17,7 @@ import 'package:guildy/slashCommands/commands.dart';
 
 // Other
 import 'package:guildy/utils/utils.dart';
+import 'package:guildy/events/events.dart';
 
 // BOT
 late Nyxx bot;
@@ -32,11 +33,13 @@ void main() {
           initialPresence: PresenceBuilder.of(
               game: Activity.of('@Guildy | ${prefix}Hjælp'))));
 
+  // Make sure events.dart is registered
+  events();
+
   Commander(bot, prefix: prefix, beforeCommandHandler: commandBefore)
-    ..registerCommand('test', testCommand)
     ..registerCommand('ping', pingCommand)
     ..registerCommand('pik', pikCommand)
-    ..registerCommand('uptime', pingCommand)
+    ..registerCommand('uptime', uptimeCommand)
     ..registerCommand('urban', urbanCommand)
     ..registerCommand('simprate', simprateCommand);
 

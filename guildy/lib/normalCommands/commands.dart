@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:math' show Random;
 import 'dart:convert' show jsonDecode;
+import 'package:guildy/main.dart';
 import 'package:http/http.dart' as http;
 import 'package:nyxx/nyxx.dart';
 import 'package:nyxx_commander/commander.dart';
@@ -71,7 +72,11 @@ Future<void> uptimeCommand(CommandContext ctx, String content) async {
 }
 
 Future<void> urbanCommand(CommandContext ctx, String content) async {
-  var args = content.replaceAll(' ', '_');
+  var args = content
+      .toLowerCase()
+      .replaceFirst('${prefix}urban', '')
+      .trim()
+      .replaceAll(' ', '_');
   final embed = EmbedBuilder()..color = getColorForUserFromMessage(ctx.message);
 
   if (args.isEmpty) {
@@ -123,8 +128,4 @@ Future<void> simprateCommand(CommandContext ctx, String content) async {
     ..color = getColorForUserFromMessage(ctx.message);
 
   await ctx.reply(MessageBuilder.embed(embed));
-}
-
-Future<void> testCommand(CommandContext ctx, String content) async {
-  await ctx.reply(MessageBuilder.content(content));
 }
