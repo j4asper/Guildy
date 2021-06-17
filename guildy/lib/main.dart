@@ -20,26 +20,17 @@ import 'package:guildy/utils/utils.dart';
 
 // BOT
 late Nyxx bot;
-void main() {
-  // Global vars
-  const String prefix = '--';
 
+// Global vars
+const String prefix = '--';
+
+void main() {
   // Bot instance
   bot = Nyxx('NzA3NTA4MjEwMzUyNzgzNDMw.XrJ0Xg.ZLPdNp4tcPnCtRLtV7L3Eu0lrSY',
       GatewayIntents.all,
       options: ClientOptions(
           initialPresence: PresenceBuilder.of(
               game: Activity.of('@Guildy | ${prefix}Hjælp'))));
-
-  bot.onReady.listen((ReadyEvent e) {
-    print('Guildy er oppe!');
-  });
-
-/*
- |-------------------|
- | STANDARD COMMANDS |
- |-------------------|
-*/
 
   Commander(bot, prefix: prefix, beforeCommandHandler: commandBefore)
     ..registerCommand('test', testCommand)
