@@ -1,9 +1,10 @@
+import 'dart:async';
 import 'dart:math' show Random;
 import 'dart:convert' show jsonDecode;
 import 'package:http/http.dart' as http;
 import 'package:nyxx/nyxx.dart';
 import 'package:nyxx_commander/commander.dart';
-import 'package:guildy/guildy.dart';
+import 'package:guildy/utils/utils.dart';
 
 Future<void> pikCommand(CommandContext ctx, String content) async {
   var random = Random();
@@ -70,7 +71,7 @@ Future<void> uptimeCommand(CommandContext ctx, String content) async {
 }
 
 Future<void> urbanCommand(CommandContext ctx, String content) async {
-  var args = content.trim().replaceAll(' ', '_');
+  var args = content.replaceAll(' ', '_');
   final embed = EmbedBuilder()..color = getColorForUserFromMessage(ctx.message);
 
   if (args.isEmpty) {
@@ -122,4 +123,8 @@ Future<void> simprateCommand(CommandContext ctx, String content) async {
     ..color = getColorForUserFromMessage(ctx.message);
 
   await ctx.reply(MessageBuilder.embed(embed));
+}
+
+Future<void> testCommand(CommandContext ctx, String content) async {
+  await ctx.reply(MessageBuilder.content(content));
 }

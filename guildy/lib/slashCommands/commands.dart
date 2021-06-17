@@ -1,4 +1,4 @@
-import 'package:guildy/guildy.dart';
+import 'package:guildy/utils/utils.dart';
 import 'package:nyxx/nyxx.dart';
 import 'package:nyxx_interactions/interactions.dart';
 
