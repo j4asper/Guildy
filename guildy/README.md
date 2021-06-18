@@ -1,19 +1,2 @@
-A library for Dart developers.
-
-## Usage
-
-A simple usage example:
-
-```dart
-import 'package:guildy/guildy.dart';
-
-main() {
-  var awesome = new Awesome();
-}
-```
-
-## Features and bugs
-
-Please file feature requests and bugs at the [issue tracker][tracker].
-
-[tracker]: http://example.com/issues/replaceme
+## Guildy omskrivning i Dart  
+Alt der ses i denne mappe er source code til Guildy, i "lib" mappen finder du alle .dart filerne.
