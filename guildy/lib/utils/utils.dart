@@ -18,6 +18,7 @@ DiscordColor? getColorForUserFromMember(Member member) {
 
 FutureOr<bool> commandBefore(CommandContext ctx) {
   if (ctx.author.bot) {
+    // Stop the bot from invoking it's own commands
     return false;
   } else {
     return true;
