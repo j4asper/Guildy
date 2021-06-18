@@ -4,13 +4,13 @@
 library guildy;
 
 import 'package:nyxx/nyxx.dart';
-import 'package:nyxx_commander/commander.dart' show Commander;
-import 'package:nyxx_interactions/interactions.dart'
-    show Interactions, SlashCommandBuilder;
+import 'package:nyxx_commander/commander.dart';
+import 'package:nyxx_interactions/interactions.dart';
 
 // Import command files
 // normalCommands
 import 'package:guildy/normalCommands/commands.dart';
+import 'package:guildy/normalCommands/owner.dart';
 
 // slashCommands
 import 'package:guildy/slashCommands/commands.dart';
@@ -36,7 +36,12 @@ void main() {
   // Make sure events.dart is registered
   events();
 
-  Commander(bot, prefix: prefix, beforeCommandHandler: commandBefore)
+  Commander(bot, prefix: prefix)
+    // OWNER COMMANDS
+    ..registerCommand('sql', sqlCommand)
+    ..registerCommand('test', testCommand)
+    //..registerSubCommand('test', testCommand)
+    //..registerCommand('test', testCommand)
     ..registerCommand('ping', pingCommand)
     ..registerCommand('pik', pikCommand)
     ..registerCommand('uptime', uptimeCommand)

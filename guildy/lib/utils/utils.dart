@@ -16,11 +16,35 @@ DiscordColor? getColorForUserFromMember(Member member) {
   return member.highestRole.color;
 }
 
-FutureOr<bool> commandBefore(CommandContext ctx) {
+Future<bool> commandBefore(CommandContext ctx) async {
   if (ctx.author.bot) {
     // Stop the bot from invoking it's own commands
     return false;
   } else {
     return true;
   }
+}
+
+Future<bool> checkGuildyTeam(CommandContext ctx) async {
+  if (await commandBefore(ctx) && ctx.guild != null) {
+    var role_ids = [for (var role in ctx.member!.roles) role.id];
+    // check if user has the guildy team role
+    if (role_ids.contains(709666805228109874)) {
+      return true;
+    } else {
+      return false;
+    }
+  } else {
+    return false;
+  }
+}
+
+Future<bool> checkOwner(CommandContext ctx) async {
+  if (await commandBefore(ctx)) {
+    // Check bot owner AKA Jasper
+    if (ctx.author.id == 282660538356596736) {
+      return true;
+    }
+  }
+  return false;
 }
