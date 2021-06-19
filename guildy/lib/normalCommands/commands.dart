@@ -180,10 +180,113 @@ Future<void> avatarCommand(CommandContext ctx, String content) async {
   await ctx.reply(MessageBuilder.embed(embed));
 }
 
+Future<void> supportServerCommand(CommandContext ctx, String content) async {
+  final embed = EmbedBuilder()
+    ..description =
+        'Du kan joine vores support server, ved at klikken [HER](https://discord.gg/ks3n5hK)'
+    ..color = getColorForUserFromMessage(ctx.message);
+
+  await ctx.reply(MessageBuilder.embed(embed));
+}
+
 Future<void> inviteCommand(CommandContext ctx, String content) async {
   final embed = EmbedBuilder()
     ..description =
-        'Du kan joine vores support server ved at klikken [HER](https://discord.gg/ks3n5hK)'
+        'Du kan invitere mig til din egen server, ved at klikke [HER](https://top.gg/bot/692019210683154462)'
+    ..color = getColorForUserFromMessage(ctx.message);
+
+  await ctx.reply(MessageBuilder.embed(embed));
+}
+
+Future<void> matchCommand(CommandContext ctx, String content) async {
+  var num = Random().nextInt(101);
+  if (ctx.message.mentions.isEmpty) {
+    final embed = EmbedBuilder()
+      ..description = 'Du har ikke nævnt en bruger'
+      ..color = getColorForUserFromMessage(ctx.message);
+    await ctx.reply(MessageBuilder.embed(embed));
+  } else if (ctx.message.mentions.length == 1) {
+    final embed = EmbedBuilder()
+      ..description =
+          '<@!${ctx.author.id}> og <@!${ctx.message.mentions[0].getFromCache()?.id}> matcher ``$num%``'
+      ..color = getColorForUserFromMessage(ctx.message);
+    await ctx.reply(MessageBuilder.embed(embed));
+  } else {
+    final embed = EmbedBuilder()
+      ..description =
+          '<@!${ctx.message.mentions[0].getFromCache()?.tag}> og <@!${ctx.message.mentions[1].getFromCache()?.tag}> matcher ``$num%``'
+      ..color = getColorForUserFromMessage(ctx.message);
+    await ctx.reply(MessageBuilder.embed(embed));
+  }
+}
+
+Future<void> iqCommand(CommandContext ctx, String content) async {
+  var iq = Random().nextInt(202);
+  var tekst;
+  var member;
+  if (ctx.message.mentions.isEmpty) {
+    member = '<@!${ctx.member?.id}>';
+  } else {
+    member = '<@!${ctx.message.mentions[0].id}>';
+  }
+
+  if (iq < 5) {
+    tekst =
+        'Holy fuck. Ikke meget at sige, fordi du kan ikke læse... Jeg får en lavere iq når jeg ser på dette.';
+  } else if (iq < 50) {
+    tekst = 'En iq under 50 er vel ok. Blev du tabt som barn?';
+  } else if (iq < 100) {
+    tekst =
+        'Din iq er lav, men heldigvis ikke under 50, hvis det kan gøre dig glad...';
+  } else if (iq < 150) {
+    tekst =
+        'Du ligger omkring gennemsnittet! Det er fedt, er det ikke? Pfff NOT.';
+  } else if (iq < 200) {
+    tekst = "Høj IQ hva' smart ass. Do you understand this.";
+  } else if (iq == 201) {
+    tekst = 'Uha, 201 IQ, jeg tager hatten af.';
+  }
+
+  final embed = EmbedBuilder()
+    ..description = "**$member's IQ:** ``$iq``\n```$tekst```"
+    ..thumbnailUrl =
+        'https://cdn130.picsart.com/285413130007211.png?type=webp&to=min&r=640'
+    ..color = getColorForUserFromMessage(ctx.message);
+
+  await ctx.reply(MessageBuilder.embed(embed));
+}
+
+Future<void> reportCommand(CommandContext ctx, String content) async {
+  final embed = EmbedBuilder()
+    ..addAuthor((author) {
+      author.name = 'Discord';
+      author.url = 'https://dis.gd/request';
+      author.iconUrl =
+          'https://discord.com/assets/2c21aeda16de354ba5334551a883b481.png';
+    })
+    ..description =
+        'Klik [HER](https://dis.gd/request) for at kontakte discord tillids og sikerhedsteam. Skriv kun hvis du skal anmelde en bruger, som har brudt discords Terms of Service.'
+    ..title = 'Kontakt discords Tillids & Sikkerhedsteam!'
+    ..thumbnailUrl =
+        'https://discord.com/assets/4ff060e44afc171e9622fbe589c2c09e.png'
+    ..color = getColorForUserFromMessage(ctx.message);
+
+  await ctx.reply(MessageBuilder.embed(embed));
+}
+
+Future<void> tosCommand(CommandContext ctx, String content) async {
+  final embed = EmbedBuilder()
+    ..addAuthor((author) {
+      author.name = 'Discord';
+      author.url = 'https://dis.gd/request';
+      author.iconUrl =
+          'https://discord.com/assets/2c21aeda16de354ba5334551a883b481.png';
+    })
+    ..description =
+        'Klik [HER](https://discordapp.com/terms) for at læse discord Terms of Service (ToS), og læs også Discords retningslinjer [HER](https://discord.com/guidelines). Disse skal overholdes for at være på discord!'
+    ..title = 'Discords Terms of Service & Retningslinjer!'
+    ..thumbnailUrl =
+        'https://discord.com/assets/4ff060e44afc171e9622fbe589c2c09e.png'
     ..color = getColorForUserFromMessage(ctx.message);
 
   await ctx.reply(MessageBuilder.embed(embed));

@@ -24,11 +24,12 @@ late Nyxx bot;
 
 // Global vars
 const String prefix = '--';
+const String token =
+    'NzA3NTA4MjEwMzUyNzgzNDMw.XrJ0Xg.ZLPdNp4tcPnCtRLtV7L3Eu0lrSY';
 
 void main() {
   // Bot instance
-  bot = Nyxx('NzA3NTA4MjEwMzUyNzgzNDMw.XrJ0Xg.ZLPdNp4tcPnCtRLtV7L3Eu0lrSY',
-      GatewayIntents.all,
+  bot = Nyxx(token, GatewayIntents.all,
       options: ClientOptions(
           initialPresence: PresenceBuilder.of(
               game: Activity.of('@Guildy | ${prefix}Hjælp'))));
@@ -56,6 +57,11 @@ void main() {
     ..registerCommand('av', avatarCommand)
     ..registerCommand('profilbillede', avatarCommand)
     //
+    ..registerCommand('tos', tosCommand)
+    ..registerCommand('report', reportCommand)
+    ..registerCommand('iq', iqCommand)
+    ..registerCommand('match', matchCommand)
+    ..registerCommand('supportserver', supportServerCommand)
     ..registerCommand('invite', inviteCommand);
 
   Interactions(bot)
