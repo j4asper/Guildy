@@ -1,9 +1,6 @@
 import 'dart:async';
-import 'dart:math' show Random;
-import 'dart:convert' show jsonDecode;
 import 'package:guildy/main.dart';
 import 'package:guildy/utils/db_handler.dart';
-import 'package:http/http.dart' as http;
 import 'package:nyxx/nyxx.dart';
 import 'package:nyxx_commander/commander.dart';
 import 'package:guildy/utils/utils.dart';

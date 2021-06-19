@@ -36,7 +36,7 @@ void main() {
   // Make sure events.dart is registered
   events();
 
-  Commander(bot, prefix: prefix)
+  Commander(bot, prefix: prefix, beforeCommandHandler: commandBefore)
     // OWNER COMMANDS
     ..registerCommand('sql', sqlCommand)
     ..registerCommand('test', testCommand)
@@ -46,7 +46,17 @@ void main() {
     ..registerCommand('pik', pikCommand)
     ..registerCommand('uptime', uptimeCommand)
     ..registerCommand('urban', urbanCommand)
-    ..registerCommand('simprate', simprateCommand);
+    ..registerCommand('simprate', simprateCommand)
+    //
+    ..registerCommand('fortrolighedspolitik', privacyCommand)
+    ..registerCommand('privacy', privacyCommand)
+    //
+    ..registerCommand('avatar', avatarCommand)
+    ..registerCommand('pb', avatarCommand)
+    ..registerCommand('av', avatarCommand)
+    ..registerCommand('profilbillede', avatarCommand)
+    //
+    ..registerCommand('invite', inviteCommand);
 
   Interactions(bot)
     ..registerSlashCommand(SlashCommandBuilder('ping', "Se Guildy's ping", [],

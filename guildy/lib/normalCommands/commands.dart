@@ -129,3 +129,62 @@ Future<void> simprateCommand(CommandContext ctx, String content) async {
 
   await ctx.reply(MessageBuilder.embed(embed));
 }
+
+Future<void> privacyCommand(CommandContext ctx, String content) async {
+  final embed = EmbedBuilder()
+    ..addField(
+        name: "Brug af Server ID'er:",
+        content:
+            'Guildy gemmer din servers ID, hvis du aktivere en feature eller ændre din prefix! Dette gør at vi kan finde din server og sørge for at du får det, som du har aktiveret/ændret.')
+    ..addField(
+        name: "Brug af Bruger ID'er:",
+        content:
+            "Guildy gemmer bruger ID'er, hvis du f.eks. laver en konto. Ændre du noget som kun ændres for din bruger, så kan du være meget sikker på at vi har gemt dit ID, for at du har adgang til det du har ændret eller aktiveret.")
+    ..addField(
+        name: 'Fjernelse af Data:',
+        content:
+            'Hvis du vil have data fjernet, så kontakt os på vores [support server](https://discord.gg/ks3n5hK), hvis du kicker Guildy vil alle data om din server blive fjernet, __ikke__ dine bruger data.')
+    ..addField(
+        name: 'Andet?',
+        content:
+            'Vi gemmer ikke logs, beskeder, profilbilleder eller ligende. Skriv til os på vores [support server](https://discord.gg/ks3n5hK) hvis du har spørgsmål.')
+    ..description =
+        "Guildy's fortrolighedspolitik, et krav fra discord at have fra den 18. august."
+    ..addAuthor((author) {
+      author.name = 'Fortrolighedspolitik';
+    })
+    ..color = getColorForUserFromMessage(ctx.message);
+
+  await ctx.reply(MessageBuilder.embed(embed));
+}
+
+Future<void> avatarCommand(CommandContext ctx, String content) async {
+  var avatarUrl;
+  var authorText;
+  if (ctx.message.mentions.isNotEmpty) {
+    avatarUrl = ctx.message.mentions[0].getFromCache()?.avatarURL();
+    authorText = "${ctx.message.mentions[0].getFromCache()?.username}'s avatar";
+  } else {
+    avatarUrl = ctx.author.avatarURL();
+    authorText = 'Din avatar';
+  }
+
+  final embed = EmbedBuilder()
+    ..imageUrl = avatarUrl
+    ..addAuthor((author) {
+      author.name = authorText;
+      author.url = avatarUrl;
+    })
+    ..color = getColorForUserFromMessage(ctx.message);
+
+  await ctx.reply(MessageBuilder.embed(embed));
+}
+
+Future<void> inviteCommand(CommandContext ctx, String content) async {
+  final embed = EmbedBuilder()
+    ..description =
+        'Du kan joine vores support server ved at klikken [HER](https://discord.gg/ks3n5hK)'
+    ..color = getColorForUserFromMessage(ctx.message);
+
+  await ctx.reply(MessageBuilder.embed(embed));
+}
