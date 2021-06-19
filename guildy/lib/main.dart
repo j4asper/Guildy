@@ -3,6 +3,9 @@
 /// More dartdocs go here.
 library guildy;
 
+import 'dart:io' as io;
+import 'package:yaml/yaml.dart';
+
 import 'package:nyxx/nyxx.dart';
 import 'package:nyxx_commander/commander.dart';
 import 'package:nyxx_interactions/interactions.dart';
@@ -24,12 +27,15 @@ late Nyxx bot;
 
 // Global vars
 const String prefix = '--';
-const String token =
-    'NzA3NTA4MjEwMzUyNzgzNDMw.XrJ0Xg.ZLPdNp4tcPnCtRLtV7L3Eu0lrSY';
 
 void main() {
+  // Get token from conf.yaml
+  var file = io.File('conf.yaml');
+  var yamlString = file.readAsStringSync();
+  Map yaml = loadYaml(yamlString);
+
   // Bot instance
-  bot = Nyxx(token, GatewayIntents.all,
+  bot = Nyxx(yaml['token'], GatewayIntents.all,
       options: ClientOptions(
           initialPresence: PresenceBuilder.of(
               game: Activity.of('@Guildy | ${prefix}Hjælp'))));
