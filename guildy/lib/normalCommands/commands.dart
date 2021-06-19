@@ -291,3 +291,57 @@ Future<void> tosCommand(CommandContext ctx, String content) async {
 
   await ctx.reply(MessageBuilder.embed(embed));
 }
+
+Future<void> coinflipCommand(CommandContext ctx, String content) async {
+  var img;
+  var tekst;
+  if (Random().nextInt(2) == 1) {
+    img = 'https://i.ibb.co/fMvR8Kw/Plat.png';
+    tekst = 'plat';
+  } else {
+    img = 'https://i.ibb.co/7pKZ6hh/Krone.png';
+    tekst = 'krone';
+  }
+  final embed = EmbedBuilder()
+    ..title = 'Det blev $tekst!'
+    ..thumbnailUrl = img
+    ..color = getColorForUserFromMessage(ctx.message);
+
+  await ctx.reply(MessageBuilder.embed(embed));
+}
+
+Future<void> feedbackCommand(CommandContext ctx, String content) async {
+  var channel = await ctx.client.fetchChannel(709077988452466811.toSnowflake())
+      as TextChannel;
+  var feedback =
+      content.toLowerCase().replaceFirst('${prefix}feedback', '').trim();
+  if (feedback.isEmpty) {
+    var embed = EmbedBuilder()
+      ..description = 'Du har ikke skrevet noget feedback!'
+      ..color = getColorForUserFromMessage(ctx.message);
+    // Send embed som bekrftelse på feedback
+    await ctx.sendMessage(MessageBuilder.embed(embed));
+    return;
+  }
+  final embed = EmbedBuilder()
+    ..title = 'Feedback'
+    ..description = feedback
+    ..addAuthor((author) {
+      author.name = ctx.guild?.name;
+      author.iconUrl = ctx.guild?.iconURL();
+    })
+    ..addFooter((footer) {
+      footer.iconUrl = ctx.author.avatarURL();
+      footer.text = 'Sendt af: ${ctx.author.username} | ID: ${ctx.author.id}';
+    })
+    ..color = getColorForUserFromMessage(ctx.message);
+
+  // Send embed til feedback kanal først
+  await channel.sendMessage(MessageBuilder.embed(embed));
+
+  var embed1 = EmbedBuilder()
+    ..description = 'Din feedback er blevet sendt til support serveren!'
+    ..color = getColorForUserFromMessage(ctx.message);
+  // Send embed som bekrftelse på feedback
+  await ctx.sendMessage(MessageBuilder.embed(embed1));
+}

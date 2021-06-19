@@ -57,6 +57,8 @@ void main() {
     ..registerCommand('av', avatarCommand)
     ..registerCommand('profilbillede', avatarCommand)
     //
+    ..registerCommand('feedback', feedbackCommand)
+    ..registerCommand('coinflip', coinflipCommand)
     ..registerCommand('tos', tosCommand)
     ..registerCommand('report', reportCommand)
     ..registerCommand('iq', iqCommand)
