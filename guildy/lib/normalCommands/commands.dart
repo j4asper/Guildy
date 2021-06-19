@@ -345,3 +345,34 @@ Future<void> feedbackCommand(CommandContext ctx, String content) async {
   // Send embed som bekrftelse på feedback
   await ctx.sendMessage(MessageBuilder.embed(embed1));
 }
+
+//////////////////////////////////////////////////////////////////////////////
+
+Future<void> statsCommand(CommandContext ctx, String content) async {
+  var guild_count = ctx.client.guilds.count;
+  var member_count = ctx.client.users.count;
+  var uptime =
+      '${ctx.client.uptime.inDays} dag(e) og ${ctx.client.uptime.inHours} time(r)';
+
+  final embed = EmbedBuilder()
+    ..addField(
+        name: 'Bot information',
+        content:
+            '**ID:** ``${ctx.client.self.id}``\n**Trello:** [Trello.com](https://trello.com/b/pvaW8xbe/guildydk)')
+    ..addField(
+        name: 'Stats',
+        content:
+            '**Servere:** $guild_count\n**Brugere:** $member_count\n**Uptime:** $uptime')
+    ..addField(
+        name: 'Links',
+        content:
+            '[Upvote](https://top.gg/bot/692019210683154462/vote) | [Support server](https://discord.gg/ks3n5hK)')
+    ..addAuthor((author) {
+      author.name = 'Find Guildy her';
+      author.iconUrl = 'https://img.icons8.com/plasticine/2x/invite.png';
+    })
+    ..thumbnailUrl = ctx.client.self.avatarURL()
+    ..color = getColorForUserFromMessage(ctx.message);
+
+  await ctx.sendMessage(MessageBuilder.embed(embed));
+}

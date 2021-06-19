@@ -63,6 +63,7 @@ void main() {
     ..registerCommand('av', avatarCommand)
     ..registerCommand('profilbillede', avatarCommand)
     //
+    ..registerCommand('stats', statsCommand)
     ..registerCommand('feedback', feedbackCommand)
     ..registerCommand('coinflip', coinflipCommand)
     ..registerCommand('tos', tosCommand)
